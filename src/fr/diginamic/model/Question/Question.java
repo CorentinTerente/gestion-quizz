@@ -12,6 +12,7 @@ public class Question {
 	
 	public Question(String intitule) {
 		this.intitule = intitule;
+		this.propositions = new ArrayList<>();
 	}
 	
 	
@@ -36,11 +37,7 @@ public class Question {
 	}
 	
 	public boolean verifierReponse(String reponse) {
-		boolean bonneReponse = false;
-		if(reponse.equals(this.bonneReponse)) {
-			bonneReponse = true;
-		}
-		return bonneReponse;
+		return bonneReponse.equals(reponse);
 	}
 	
 	public void addProposition(String proposition) {
