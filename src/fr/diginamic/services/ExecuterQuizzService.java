@@ -10,7 +10,6 @@ public class ExecuterQuizzService extends MenuService{
 	@Override
 	public void executeUC(Scanner scanner, QuestionDao dao) {
 		int nbPoints = 0;
-		TypeQuestion[] lesTypes = TypeQuestion.values();
 		for(Question laQuestion : dao.findAll()) {
 			System.out.println((dao.findAll().indexOf(laQuestion)+1)+")  "+laQuestion.getIntitule());
 			for(String proposition : laQuestion.getPropositions()) {
@@ -19,7 +18,7 @@ public class ExecuterQuizzService extends MenuService{
 			System.out.println("votre reponse ?");
 			String reponse = scanner.nextLine();
 			if(laQuestion.verifierReponse(reponse)) {
-				if(laQuestion.getTypeDeQuestion().equals(lesTypes[0])) {
+				if(laQuestion.getTypeDeQuestion().equals(TypeQuestion.SIMPLE)) {
 					nbPoints += 1;
 				} else {
 					nbPoints +=2;
