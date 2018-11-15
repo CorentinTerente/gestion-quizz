@@ -13,10 +13,14 @@ public class SupprimerQuestionService extends MenuService{
 		int numQuestions = Integer.parseInt(scanner.nextLine());
 		Question questionASuppr;
 		if(!dao.findAll().isEmpty()) {
-			questionASuppr = dao.findAll().get(numQuestions-1);
-			dao.delete(questionASuppr);
+			if(numQuestions-1 > dao.findAll().size()) {
+				throw new SupprimerQuestionException("la question n'existe pas");
+			} else {
+				questionASuppr = dao.findAll().get(numQuestions-1);
+				dao.delete(questionASuppr);
+			}
 		} else {
-			throw new SupprimerQuestionException("la question n'existe pas");
+			throw new SupprimerQuestionException("il n'y a pas de question");
 		}
 		
 	}

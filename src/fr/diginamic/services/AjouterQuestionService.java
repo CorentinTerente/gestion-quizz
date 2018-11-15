@@ -30,11 +30,10 @@ public class AjouterQuestionService extends MenuService{
 			String proposition = scanner.nextLine();
 			nouvelleQuestion.addProposition(proposition);
 		}
-		System.out.println("La bonne reponse est la numero :");
+		System.out.println("La bonne reponse est  :");
 		String bonneReponse=scanner.nextLine();
 		nouvelleQuestion.setBonneReponse(bonneReponse);
 		dao.save(nouvelleQuestion);
 		
 	}
-	
 }
