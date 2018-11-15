@@ -2,13 +2,15 @@ package fr.diginamic.model.Question;
 
 import java.util.ArrayList;
 
+import fr.diginamic.model.TypeQuestion;
+
 
 public class Question {
 	
 	private String intitule;
 	private ArrayList<String> propositions;
 	private String bonneReponse;
-	
+	private TypeQuestion typeDeQuestion;
 	
 	public Question(String intitule) {
 		this.intitule = intitule;
@@ -33,7 +35,12 @@ public class Question {
 		return bonneReponse;
 	}
 	public void setBonneReponse(String bonneReponse) {
-		this.bonneReponse = bonneReponse;
+		for(String propo : propositions) {
+			if(propo.equals(bonneReponse)) {
+				this.bonneReponse = bonneReponse;
+			}
+		}
+			
 	}
 	
 	public boolean verifierReponse(String reponse) {
@@ -43,4 +50,19 @@ public class Question {
 	public void addProposition(String proposition) {
 		this.propositions.add(proposition);
 	}
+
+
+
+	public TypeQuestion getTypeDeQuestion() {
+		return typeDeQuestion;
+	}
+
+
+
+	public void setTypeDeQuestion(TypeQuestion typeDeQuestion) {
+		this.typeDeQuestion = typeDeQuestion;
+	}
+
+	
+
 }

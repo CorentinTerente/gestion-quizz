@@ -2,6 +2,7 @@ package fr.diginamic.services;
 
 import java.util.Scanner;
 import fr.diginamic.dao.QuestionDao.QuestionDao;
+import fr.diginamic.model.TypeQuestion;
 import fr.diginamic.model.Question.Question;
 
 public class ExecuterQuizzService extends MenuService{
@@ -9,6 +10,7 @@ public class ExecuterQuizzService extends MenuService{
 	@Override
 	public void executeUC(Scanner scanner, QuestionDao dao) {
 		int nbPoints = 0;
+		TypeQuestion[] lesTypes = TypeQuestion.values();
 		for(Question laQuestion : dao.findAll()) {
 			System.out.println((dao.findAll().indexOf(laQuestion)+1)+")  "+laQuestion.getIntitule());
 			for(String proposition : laQuestion.getPropositions()) {
@@ -17,7 +19,11 @@ public class ExecuterQuizzService extends MenuService{
 			System.out.println("votre reponse ?");
 			String reponse = scanner.nextLine();
 			if(laQuestion.verifierReponse(reponse)) {
-				nbPoints += 1;
+				if(laQuestion.getTypeDeQuestion().equals(lesTypes[0])) {
+					nbPoints += 1;
+				} else {
+					nbPoints +=2;
+				}
 			}
 			
 		}
