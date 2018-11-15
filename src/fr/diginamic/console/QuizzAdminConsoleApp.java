@@ -1,4 +1,6 @@
 package fr.diginamic.console;
+import fr.diginamic.dao.QuestionDao.QuestionDao;
+import fr.diginamic.dao.QuestionDao.QuestionMemDao;
 import fr.diginamic.model.Question.*;
 
 import java.util.ArrayList;
@@ -10,7 +12,7 @@ public class QuizzAdminConsoleApp {
 		Scanner questionUser = new Scanner(System.in);
 		int choixUser = 0;
 		boolean quizz = true;
-		List<Question> listeQuestions = new ArrayList<Question>();
+		QuestionDao listeQuestions = new QuestionMemDao();
 		int nbPoints=0;
 		
 		while(quizz) {
@@ -20,7 +22,7 @@ public class QuizzAdminConsoleApp {
 			switch(choixUser) {
 			//liste les questions dans la liste
 				case 1: System.out.println("Liste questions");
-					afficherTouteQuestion(listeQuestions);
+					afficherTouteQuestion(listeQuestions.findAll());
 			break;
 			//ajoute une question avec le nombre de proposition choisi 
 				case 2: System.out.println("Ajout d’une nouvelle question");
@@ -32,8 +34,8 @@ public class QuizzAdminConsoleApp {
 			break;
 			//execute le quizz
 				case 4: System.out.println("Exécution du quizz");
-					for(Question laQuestion : listeQuestions) {
-						System.out.println((listeQuestions.indexOf(laQuestion)+1)+")  "+laQuestion.getIntitule());
+					for(Question laQuestion : listeQuestions.findAll()) {
+						System.out.println((listeQuestions.findAll().indexOf(laQuestion)+1)+")  "+laQuestion.getIntitule());
 						afficherUneQuestion(laQuestion);
 						System.out.println("votre reponse ?");
 						String reponse = questionUser.nextLine();
@@ -58,7 +60,7 @@ public class QuizzAdminConsoleApp {
 	}
 	
 	
-	public static void ajouterQuestion(Scanner sc,List<Question> listeQuestions) {
+	public static void ajouterQuestion(Scanner sc,QuestionDao listeQuestions) {
 		System.out.println("veuillez saisir l'intitule de la question");
 		String intitule = sc.nextLine();
 		Question nouvelleQuestion = new Question(intitule);
@@ -71,14 +73,16 @@ public class QuizzAdminConsoleApp {
 			nouvelleQuestion.addProposition(proposition);
 		}
 		
-		listeQuestions.add(nouvelleQuestion);
+		listeQuestions.save(nouvelleQuestion);
 	}
 	
-	public static void supprimerQuestion(Scanner sc, List<Question> listeQuestion) {
+	public static void supprimerQuestion(Scanner sc, QuestionDao listeQuestion) {
 		System.out.println("Saisir le numero de la question");
 		int numQuestions = Integer.parseInt(sc.nextLine());
-		if(!listeQuestion.isEmpty()) {
-			listeQuestion.remove(numQuestions);
+		Question questionASuppr;
+		if(!listeQuestion.findAll().isEmpty()) {
+			questionASuppr = listeQuestion.findAll().get(numQuestions);
+			listeQuestion.delete(questionASuppr);
 		}
 	}
 	
