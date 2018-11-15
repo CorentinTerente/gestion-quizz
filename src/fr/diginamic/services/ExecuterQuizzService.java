@@ -1,7 +1,6 @@
 package fr.diginamic.services;
 
 import java.util.Scanner;
-
 import fr.diginamic.dao.QuestionDao.QuestionDao;
 import fr.diginamic.model.Question.Question;
 

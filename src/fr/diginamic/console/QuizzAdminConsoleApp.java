@@ -1,10 +1,10 @@
 package fr.diginamic.console;
+
 import fr.diginamic.dao.QuestionDao.QuestionDao;
 import fr.diginamic.services.*;
 import fr.diginamic.dao.QuestionDao.QuestionMemDao;
 import fr.diginamic.exceptions.AjouterQuestionException;
 import fr.diginamic.exceptions.SupprimerQuestionException;
-
 import java.util.Scanner;
 
 public class QuizzAdminConsoleApp {
@@ -30,7 +30,7 @@ public class QuizzAdminConsoleApp {
 					try {
 						ajoutQuestion.executeUC(questionUser, listeQuestions);
 					} catch(AjouterQuestionException e) {
-						System.out.println("L'intitule ne doit pas etre vide / le nombre de proposition doit etre au moins 2");
+						System.out.println(e.getMessage());
 					}
 			break;
 			//supprime une question de la liste
@@ -39,7 +39,7 @@ public class QuizzAdminConsoleApp {
 					try {
 						supprQuestion.executeUC(questionUser, listeQuestions);
 					} catch (SupprimerQuestionException e) {
-						System.out.println("Cette question n'existe pas");
+						System.out.println(e.getMessage());
 					}
 			break;
 			//execute le quizz

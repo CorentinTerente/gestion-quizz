@@ -1,7 +1,6 @@
 package fr.diginamic.services;
 
 import java.util.Scanner;
-
 import fr.diginamic.dao.QuestionDao.QuestionDao;
 import fr.diginamic.exceptions.SupprimerQuestionException;
 import fr.diginamic.model.Question.Question;
@@ -17,7 +16,7 @@ public class SupprimerQuestionService extends MenuService{
 			questionASuppr = dao.findAll().get(numQuestions-1);
 			dao.delete(questionASuppr);
 		} else {
-			throw new SupprimerQuestionException();
+			throw new SupprimerQuestionException("la question n'existe pas");
 		}
 		
 	}
